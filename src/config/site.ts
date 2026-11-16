@@ -10,7 +10,7 @@ export const siteConfig = {
   avatar: "/images/avatar-en.svg",
   heroImage: "/images/hero-atmosphere.svg",
   startDate: "2026-11-12",
-  url: "https://en-blog.example.com",
+  url: "https://en-blog-pages.pages.dev",
   profile: {
     name: "en",
     role: "AI 学习者 · 内容创作者",

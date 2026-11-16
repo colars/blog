@@ -4,6 +4,8 @@
 
 GitHub 仓库：[colars/blog](https://github.com/colars/blog)
 
+线上站点：[en-blog-pages.pages.dev](https://en-blog-pages.pages.dev)
+
 ## 技术栈
 
 - Astro 7 + TypeScript
@@ -89,9 +91,17 @@ Environment:
 
 ## 部署
 
-构建命令为 `pnpm build`，输出目录为 `dist/`。可部署到 Cloudflare Pages、Vercel 或 Netlify，平台框架预设选择 Astro。
+项目已部署到 Cloudflare Pages：
 
-当前使用 `https://en-blog.example.com` 作为 SEO 占位域名，上线前必须替换为真实域名。
+```text
+Project: en-blog-pages
+Branch: main
+Build command: pnpm build
+Output directory: dist
+URL: https://en-blog-pages.pages.dev
+```
+
+公开代码仓库更新后由 Cloudflare Git 集成自动构建；私有文章仓库 `posts/**` 更新后由 Deploy Hook 触发重新构建。
 
 ## 视觉来源
 

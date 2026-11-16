@@ -2,6 +2,16 @@
 
 本项目采用「公开代码 + 私有文章」的折中方案。现有公开文章继续保留在 `src/content/posts/`，不再迁移；后续私有文章放入独立的私有 GitHub 仓库 `colars/blog-content`。
 
+当前部署状态：
+
+```text
+Cloudflare Pages project: en-blog-pages
+Production URL: https://en-blog-pages.pages.dev
+Public code repository: colars/blog
+Private content repository: colars/blog-content
+Production branch: main
+```
+
 ## 内容结构
 
 私有仓库保持以下结构：
@@ -36,7 +46,7 @@ Token 只保存到 Cloudflare Pages 的环境变量中。不要写入 `.env.exam
 
 ## Cloudflare Pages 配置
 
-在 Cloudflare Pages 中创建或调整项目：
+Cloudflare Pages 项目 `en-blog-pages` 已按以下配置运行：
 
 ```text
 Git provider: GitHub

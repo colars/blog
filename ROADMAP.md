@@ -1,6 +1,6 @@
 # ROADMAP
 
-更新时间：2026-11-16 16:32
+更新时间：2026-11-16 18:34
 
 ## 当前状态
 
@@ -11,13 +11,12 @@
 - 生产构建、Pagefind 搜索索引、RSS、Sitemap 与站内链接检查均通过。
 - 项目已推送到 `https://github.com/colars/blog` 的 `main` 分支，后续推送需逐次确认。
 - 已支持公开文章与私有文章仓库合并构建，现有公开文章及其 Git 历史保持不变。
+- 已部署到 Cloudflare Pages，生产地址为 `https://en-blog-pages.pages.dev`。
+- 私有文章仓库、加密 Token、Deploy Hook 和 GitHub Actions 自动部署链路均已验证。
 
 ### 进行中
 
-- 创建私有文章仓库 `colars/blog-content`。
-- 创建 180 天有效期的只读 Fine-grained Token。
-- 配置 Cloudflare Pages 构建环境、Deploy Hook 与私有仓库 GitHub Actions。
-- 完成首次 Cloudflare Pages 部署和线上验证。
+- 无。
 
 ### 待确认
 
@@ -31,6 +30,7 @@
 
 ## 最近完成
 
+- 2026-11-16 18:34：完成 Cloudflare Pages 首次生产部署、Deploy Hook、私有仓库 Actions Secret 与自动部署验证。
 - 2026-11-16 16:32：完成公开文章与私有文章合并构建、文件名冲突保护和 Cloudflare Pages 私有内容部署文档。
 - 2026-11-16 11:19：初始化 Git 并关联 `colars/blog`，保留远端初始 `LICENSE`，完成个人博客代码首次推送。
 - 2026-11-12 17:33：修复文章右侧栏重叠问题，将目录与订阅卡片合并为粘性侧栏并限制视口内独立滚动。
@@ -41,6 +41,10 @@
 
 ## 最近验证
 
+- 2026-11-16 18:34：`https://en-blog-pages.pages.dev` 返回 200，页面标题为「en 的个人随笔」。
+- 2026-11-16 18:33：GitHub Actions 手动触发部署成功，随后 Cloudflare 生产部署 `524d58c9` 的 `deploy` 阶段状态为 `success`。
+- 2026-11-16 18:30：私有仓库 Secret `CLOUDFLARE_DEPLOY_HOOK_URL` 写入成功，Cloudflare Deploy Hook `blog-content-main` 触发返回 200。
+- 2026-11-16 18:29：Cloudflare 生产和预览环境的 `CONTENT_REPO_TOKEN` 均确认改为加密 Secret。
 - 2026-11-16 16:32：临时私有文章与 3 篇公开文章合并成功；包含私有文章时生成 26 个页面，Pagefind 索引正常。
 - 2026-11-16 16:32：清理测试内容后重新构建，恢复 3 篇文章和 23 个公开页面。
 - 2026-11-16 16:31：公开文章与私有文章重名时构建按预期退出，未发生静默覆盖。
