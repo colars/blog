@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+  <defs>
+    <linearGradient id="avatarBg" x1="34" y1="28" x2="282" y2="292" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#dcfff5"/>
+      <stop offset=".52" stop-color="#c7f2e7"/>
+      <stop offset="1" stop-color="#ddd8ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(246 76) rotate(133) scale(130)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff7b8" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#fff7b8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="320" rx="80" fill="url(#avatarBg)"/>
+  <rect width="320" height="320" rx="80" fill="url(#glow)"/>
+  <path d="M52 248c36-48 74-67 112-57 37 10 62 39 102 78" fill="none" stroke="#fff" stroke-opacity=".46" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="253" cy="69" r="13" fill="#fff4a7"/>
+  <circle cx="260" cy="60" r="22" fill="none" stroke="#fff" stroke-opacity=".55"/>
+  <text x="160" y="199" text-anchor="middle" font-family="Georgia,serif" font-size="128" font-style="italic" fill="#356b64">en</text>
+</svg>

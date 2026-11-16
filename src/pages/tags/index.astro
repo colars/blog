@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import { getAllTags, getPublishedPosts, tagToSlug } from "../../utils/content";
+
+const posts = await getPublishedPosts();
+const tags = getAllTags(posts);
+---
+
+<BaseLayout title="标签" description="通过标签探索 en 的个人随笔。">
+  <PageIntro
+    title="标签索引"
+    description="从一个关键词出发，找到主题相近的文章与持续延伸的思考。"
+    count={tags.size}
+    countLabel="个标签"
+  />
+
+  <section class="page-content">
+    <div class="container-shell">
+      <div class="page-main-card glass-card">
+        <div class="tag-index-grid">
+          {
+            [...tags.entries()].map(([tag, count]) => (
+              <a class="tag-index-card" href={`/tags/${tagToSlug(tag)}/`}>
+                <strong>#{tag}</strong>
+                <span>{count} 篇文章</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

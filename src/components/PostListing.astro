@@ -1,0 +1,85 @@
+---
+import type { Post } from "../utils/content";
+import {
+  formatDate,
+  getAllTags,
+  getPostPath,
+  tagToSlug,
+} from "../utils/content";
+import Icon from "./Icon.astro";
+import PageIntro from "./PageIntro.astro";
+import Pagination from "./Pagination.astro";
+import PostCard from "./PostCard.astro";
+
+interface Props {
+  posts: Post[];
+  currentPage: number;
+  pageSize?: number;
+}
+
+const { posts, currentPage, pageSize = 6 } = Astro.props;
+const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
+const start = (currentPage - 1) * pageSize;
+const visiblePosts = posts.slice(start, start + pageSize);
+const tags = [...getAllTags(posts).entries()].slice(0, 12);
+const recentPosts = posts.slice(0, 4);
+---
+
+<PageIntro
+  title="所有文章"
+  description="把零散的思考整理成可以回看的文字。这里收录 AI 学习、内容创作与日常生活的长期记录。"
+  count={posts.length}
+/>
+
+<section class="page-content">
+  <div class="container-shell page-grid">
+    <div>
+      <div class="page-main-card glass-card">
+        <div class="post-list">
+          {visiblePosts.map((post) => <PostCard post={post} />)}
+        </div>
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
+      </div>
+    </div>
+
+    <aside class="home-column home-sidebar">
+      <section class="sidebar-card glass-card">
+        <div class="sidebar-title">
+          <span>最近发布</span>
+          <Icon name="pen" size={17} />
+        </div>
+        <div class="sidebar-section-list">
+          {
+            recentPosts.map((post) => (
+              <a class="sidebar-section-link" href={getPostPath(post)}>
+                <span>{post.data.title}</span>
+                <small>{formatDate(post.data.publishedAt).slice(5)}</small>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="sidebar-card glass-card">
+        <div class="sidebar-title">
+          <span>常用标签</span>
+          <a href="/tags/">全部</a>
+        </div>
+        <div class="tag-cloud">
+          {tags.map(([tag, count]) => <a class="tag-chip" href={`/tags/${tagToSlug(tag)}/`}>#{tag} {count}</a>)}
+        </div>
+      </section>
+
+      <section class="sidebar-card glass-card">
+        <div class="sidebar-title">
+          <span>订阅更新</span>
+          <Icon name="rss" size={17} />
+        </div>
+        <p class="profile-bio">通过 RSS 阅读器订阅新文章，没有算法，也不会错过更新。</p>
+        <a class="profile-about-link" href="/rss.xml" style="margin-top: 0.8rem;">
+          获取 RSS 地址 <Icon name="arrowRight" size={16} />
+        </a>
+      </section>
+    </aside>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import PostCard from "../../components/PostCard.astro";
+import {
+  categoryToSlug,
+  getAllCategories,
+  getPublishedPosts,
+  type Post,
+} from "../../utils/content";
+
+interface Props {
+  categoryName: string;
+  posts: Post[];
+}
+
+export async function getStaticPaths() {
+  const allPosts = await getPublishedPosts();
+
+  return [...getAllCategories(allPosts).keys()].map((categoryName) => ({
+    params: { category: categoryToSlug(categoryName) },
+    props: {
+      categoryName,
+      posts: allPosts.filter((post) => post.data.category === categoryName),
+    },
+  }));
+}
+
+const { categoryName, posts } = Astro.props;
+---
+
+<BaseLayout title={categoryName} description={`浏览「${categoryName}」分类下的全部文章。`}>
+  <PageIntro
+    title={categoryName}
+    description={`这一类内容围绕「${categoryName}」展开，记录问题、方法和阶段性的答案。`}
+    count={posts.length}
+  />
+
+  <section class="page-content">
+    <div class="container-shell">
+      <div class="page-main-card glass-card">
+        <div class="post-list">
+          {posts.map((post) => <PostCard post={post} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

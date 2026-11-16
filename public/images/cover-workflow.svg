@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+  <defs>
+    <linearGradient id="bg" x1="40" y1="30" x2="1160" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff7dd"/>
+      <stop offset=".5" stop-color="#f8efdc"/>
+      <stop offset="1" stop-color="#e5f7ef"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" rx="48" fill="url(#bg)"/>
+  <g transform="translate(145 110)">
+    <rect width="910" height="540" rx="34" fill="#fff" fill-opacity=".52" stroke="#fff" stroke-width="2"/>
+    <g stroke="#c0a873" stroke-opacity=".45">
+      <path d="M80 110h750M80 220h750M80 330h750M80 440h750"/>
+    </g>
+    <g fill="#3e847c" font-family="Arial,sans-serif">
+      <rect x="62" y="48" width="190" height="82" rx="18" fill="#c8f0e5"/>
+      <text x="98" y="99" font-size="26">收集灵感</text>
+      <rect x="335" y="166" width="190" height="82" rx="18" fill="#dcd8ff"/>
+      <text x="372" y="217" font-size="26">梳理问题</text>
+      <rect x="610" y="282" width="190" height="82" rx="18" fill="#fff0bb"/>
+      <text x="645" y="333" font-size="26">形成初稿</text>
+      <rect x="335" y="398" width="190" height="82" rx="18" fill="#d8eee8"/>
+      <text x="380" y="449" font-size="26">复盘迭代</text>
+    </g>
+    <path d="M252 89h180v77M525 207h190v75M705 364c70 0 88 35 58 73-19 24-61 15-61 35M335 439H190V148" fill="none" stroke="#71b8a8" stroke-width="4" stroke-linecap="round" stroke-dasharray="9 12"/>
+    <circle cx="252" cy="89" r="9" fill="#6bc6b2"/>
+    <circle cx="525" cy="207" r="9" fill="#8d83dd"/>
+    <circle cx="705" cy="364" r="9" fill="#dfb94f"/>
+    <circle cx="335" cy="439" r="9" fill="#5b9f95"/>
+  </g>
+  <g fill="#fff8b9">
+    <circle cx="1050" cy="126" r="9"/>
+    <circle cx="1084" cy="98" r="4"/>
+    <circle cx="968" cy="175" r="4"/>
+  </g>
+</svg>

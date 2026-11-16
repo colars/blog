@@ -1,0 +1,46 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  currentPage: number;
+  totalPages: number;
+}
+
+const { currentPage, totalPages } = Astro.props;
+
+function pageUrl(page: number): string {
+  return page === 1 ? "/posts/" : `/posts/page/${page}/`;
+}
+---
+
+{
+  totalPages > 1 && (
+    <nav class="pagination" aria-label="文章分页">
+      <a
+        class:list={["pagination-button", { disabled: currentPage === 1 }]}
+        href={pageUrl(Math.max(1, currentPage - 1))}
+        aria-disabled={currentPage === 1}
+      >
+        <Icon name="chevronLeft" size={17} /> 上一页
+      </a>
+      <div class="pagination-pages">
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+          <a
+            class:list={["pagination-page", { active: page === currentPage }]}
+            href={pageUrl(page)}
+            aria-current={page === currentPage ? "page" : undefined}
+          >
+            {page}
+          </a>
+        ))}
+      </div>
+      <a
+        class:list={["pagination-button", { disabled: currentPage === totalPages }]}
+        href={pageUrl(Math.min(totalPages, currentPage + 1))}
+        aria-disabled={currentPage === totalPages}
+      >
+        下一页 <Icon name="chevronRight" size={17} />
+      </a>
+    </nav>
+  )
+}

@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import PostListing from "../../components/PostListing.astro";
+import { getPublishedPosts } from "../../utils/content";
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout title="所有文章" description="浏览 en 的个人随笔全部文章。">
+  <PostListing posts={posts} currentPage={1} />
+</BaseLayout>

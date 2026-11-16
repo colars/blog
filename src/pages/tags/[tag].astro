@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import PostCard from "../../components/PostCard.astro";
+import {
+  getAllTags,
+  getPublishedPosts,
+  tagToSlug,
+  type Post,
+} from "../../utils/content";
+
+interface Props {
+  tagName: string;
+  posts: Post[];
+}
+
+export async function getStaticPaths() {
+  const allPosts = await getPublishedPosts();
+
+  return [...getAllTags(allPosts).keys()].map((tagName) => ({
+    params: { tag: tagToSlug(tagName) },
+    props: {
+      tagName,
+      posts: allPosts.filter((post) => post.data.tags.includes(tagName)),
+    },
+  }));
+}
+
+const { tagName, posts } = Astro.props;
+---
+
+<BaseLayout title={`#${tagName}`} description={`浏览标签「${tagName}」下的全部文章。`}>
+  <PageIntro
+    title={`#${tagName}`}
+    description={`所有与「${tagName}」有关的记录，按重要性和发布时间排列。`}
+    count={posts.length}
+  />
+
+  <section class="page-content">
+    <div class="container-shell">
+      <div class="page-main-card glass-card">
+        <div class="post-list">
+          {posts.map((post) => <PostCard post={post} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

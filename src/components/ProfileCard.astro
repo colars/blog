@@ -1,0 +1,38 @@
+---
+import { siteConfig } from "../config/site";
+import Icon from "./Icon.astro";
+---
+
+<section class="profile-card glass-card">
+  <div class="profile-glow" aria-hidden="true"></div>
+  <div class="profile-avatar-wrap">
+    <img
+      class="profile-avatar"
+      src={siteConfig.avatar}
+      alt={`${siteConfig.author} 的头像`}
+      width="320"
+      height="320"
+    />
+    <span class="profile-status" title="持续学习中"></span>
+  </div>
+  <div class="profile-copy">
+    <p class="eyebrow">ABOUT THE AUTHOR</p>
+    <h2>{siteConfig.profile.name}</h2>
+    <p class="profile-role">{siteConfig.profile.role}</p>
+    <p class="profile-bio">{siteConfig.profile.bio}</p>
+  </div>
+  <div class="profile-socials">
+    <a href={siteConfig.social[0].href} aria-label={siteConfig.social[0].label}>
+      <Icon name="github" size={18} />
+    </a>
+    <a href={siteConfig.social[1].href} aria-label={siteConfig.social[1].label}>
+      <Icon name="mail" size={18} />
+    </a>
+    <a href="/rss.xml" aria-label="RSS 订阅">
+      <Icon name="rss" size={18} />
+    </a>
+  </div>
+  <a class="profile-about-link" href="/about/">
+    了解更多 <Icon name="arrowRight" size={16} />
+  </a>
+</section>

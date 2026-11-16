@@ -1,0 +1,213 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../components/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import PostCard from "../../components/PostCard.astro";
+import {
+  formatLongDate,
+  getPostPath,
+  getPostSlug,
+  getPublishedPosts,
+  getReadingTime,
+  tagToSlug,
+  type Post,
+} from "../../utils/content";
+
+interface Props {
+  post: Post;
+}
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+
+  return posts.map((post) => ({
+    params: { slug: getPostSlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const allPosts = await getPublishedPosts();
+const postIndex = allPosts.findIndex((item) => item.id === post.id);
+const newerPost = postIndex > 0 ? allPosts[postIndex - 1] : undefined;
+const olderPost =
+  postIndex >= 0 && postIndex < allPosts.length - 1
+    ? allPosts[postIndex + 1]
+    : undefined;
+const relatedPosts = allPosts
+  .filter(
+    (item) =>
+      item.id !== post.id &&
+      item.data.tags.some((tag) => post.data.tags.includes(tag)),
+  )
+  .slice(0, 2);
+const cover = post.data.cover ?? "/images/cover-blog.svg";
+const tocHeadings = headings.filter((heading) => heading.depth <= 3);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishedAt.toISOString(),
+  dateModified:
+    post.data.updatedAt?.toISOString() ?? post.data.publishedAt.toISOString(),
+  author: {
+    "@type": "Person",
+    name: "en",
+  },
+  image: new URL(cover, Astro.site).toString(),
+  mainEntityOfPage: Astro.url.toString(),
+};
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={cover}
+  type="article"
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <div class="reading-progress" aria-hidden="true"></div>
+
+  <article class="container-shell article-detail">
+    <header class="article-hero">
+      <div class="article-hero-cover">
+        <img src={cover} alt="" width="1200" height="760" />
+      </div>
+      <div class="article-hero-content">
+        <div class="post-kicker">
+          <span>{post.data.category}</span>
+          <span>·</span>
+          <span>第 {String(postIndex + 1).padStart(2, "0")} 篇</span>
+        </div>
+        <h1>{post.data.title}</h1>
+        <p class="article-hero-description">{post.data.description}</p>
+        <div class="article-meta">
+          <span><Icon name="calendar" size={15} /> {formatLongDate(post.data.publishedAt)}</span>
+          <span><Icon name="clock" size={15} /> {getReadingTime(post.body)} 分钟阅读</span>
+          <span><Icon name="pen" size={15} /> by en</span>
+        </div>
+        <div class="post-tags">
+          {
+            post.data.tags.map((tag) => (
+              <a class="tag-chip" href={`/tags/${tagToSlug(tag)}/`}>#{tag}</a>
+            ))
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="article-layout">
+      <div class="article-shell glass-card">
+        <div class="prose">
+          <Content />
+        </div>
+
+        <footer class="article-footer">
+          <p class="article-footer-label">这篇文章发布于 {formatLongDate(post.data.publishedAt)}</p>
+          <div class="tag-cloud">
+            {
+              post.data.tags.map((tag) => (
+                <a class="tag-chip" href={`/tags/${tagToSlug(tag)}/`}>#{tag}</a>
+              ))
+            }
+          </div>
+        </footer>
+      </div>
+
+      <aside class="home-column article-sidebar">
+        {
+          tocHeadings.length > 0 && (
+            <nav class="toc-card glass-card" aria-label="文章目录">
+              <h2>本文目录</h2>
+              <div class="toc-list">
+                {tocHeadings.map((heading) => (
+                  <a href={`#${heading.slug}`} data-depth={heading.depth}>
+                    {heading.text}
+                  </a>
+                ))}
+              </div>
+            </nav>
+          )
+        }
+
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>订阅新文章</span>
+            <Icon name="rss" size={17} />
+          </div>
+          <p class="profile-bio">通过 RSS 持续阅读，不必依赖平台推荐。</p>
+          <a class="profile-about-link" href="/rss.xml" style="margin-top: 0.8rem;">
+            获取 RSS 地址 <Icon name="arrowRight" size={16} />
+          </a>
+        </section>
+      </aside>
+    </div>
+
+    {
+      (olderPost || newerPost) && (
+        <div class="article-navigation">
+          {olderPost && (
+            <a class="article-nav-card" href={getPostPath(olderPost)}>
+              <small>← 上一篇</small>
+              <strong>{olderPost.data.title}</strong>
+            </a>
+          )}
+          {newerPost && (
+            <a class="article-nav-card next" href={getPostPath(newerPost)}>
+              <small>下一篇 →</small>
+              <strong>{newerPost.data.title}</strong>
+            </a>
+          )}
+        </div>
+      )
+    }
+
+    {
+      relatedPosts.length > 0 && (
+        <section style="margin-top: 2.5rem;">
+          <div class="content-header">
+            <div>
+              <p class="eyebrow">KEEP READING</p>
+              <h2 class="section-heading">继续阅读</h2>
+            </div>
+            <a class="section-more" href="/posts/">全部文章 <Icon name="arrowRight" size={16} /></a>
+          </div>
+          <div class="post-list">
+            {relatedPosts.map((relatedPost) => <PostCard post={relatedPost} />)}
+          </div>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<script>
+  const progressBar = document.querySelector<HTMLElement>(".reading-progress");
+  let ticking = false;
+
+  function updateProgress() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0;
+
+    if (progressBar) {
+      progressBar.style.transform = `scaleX(${progress})`;
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    },
+    { passive: true },
+  );
+
+  updateProgress();
+</script>

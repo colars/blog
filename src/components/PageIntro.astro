@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  count?: number;
+  countLabel?: string;
+}
+
+const { title, description, count, countLabel = "篇文章" } = Astro.props;
+---
+
+<section class="page-intro">
+  <div class="container-shell">
+    <div class="page-intro-inner">
+      <div>
+        <p class="eyebrow">EN'S NOTES</p>
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </div>
+      {
+        typeof count === "number" && (
+          <div class="page-intro-count">
+            {String(count).padStart(2, "0")}
+            <small>{countLabel}</small>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

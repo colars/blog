@@ -1,0 +1,23 @@
+---
+import Icon from "./Icon.astro";
+import { siteConfig } from "../config/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <p class="footer-title">{siteConfig.title}</p>
+      <p class="footer-copy">
+        保持着好奇，记录着当下。内容由 <span>{siteConfig.author}</span> 持续更新。
+      </p>
+    </div>
+    <div class="footer-links">
+      <a href="/rss.xml"><Icon name="rss" size={17} /> RSS</a>
+      <a href="/about/"><Icon name="user" size={17} /> 关于</a>
+      <a href="#top"><Icon name="arrowUp" size={17} /> 回到顶部</a>
+    </div>
+    <p class="footer-meta">© {year} {siteConfig.author} · Built with Astro</p>
+  </div>
+</footer>

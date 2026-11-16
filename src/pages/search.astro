@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import PageIntro from "../components/PageIntro.astro";
+---
+
+<BaseLayout title="搜索" description="搜索 en 的个人随笔。">
+  <link slot="head" rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <PageIntro
+    title="搜索文章"
+    description="输入标题、标签或正文里的关键词。搜索索引在生产构建后生成。"
+  />
+
+  <section class="page-content">
+    <div class="container-shell">
+      <div class="search-shell glass-card">
+        <div id="search"></div>
+        <noscript>
+          <p>搜索需要启用 JavaScript。你也可以直接浏览 <a href="/posts/">全部文章</a>。</p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (typeof window.PagefindUI === "function") {
+        new window.PagefindUI({
+          element: "#search",
+          showSubResults: true,
+          showImages: false,
+          bundlePath: "/pagefind/",
+          translations: {
+            placeholder: "搜索文章、标签或正文…",
+            zero_results: "没有找到与 [SEARCH_TERM] 相关的内容",
+            many_results: "找到 [COUNT] 条与 [SEARCH_TERM] 相关的内容",
+            one_result: "找到 1 条与 [SEARCH_TERM] 相关的内容",
+            searching: "正在搜索…",
+            clear_search: "清空",
+            load_more: "加载更多",
+          },
+        });
+      }
+    });
+  </script>
+</BaseLayout>

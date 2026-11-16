@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import PageIntro from "../components/PageIntro.astro";
+import {
+  formatDate,
+  getPostPath,
+  getPublishedPosts,
+  getReadingTime,
+} from "../utils/content";
+
+const posts = await getPublishedPosts();
+const chronologicalPosts = [...posts].sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime(),
+);
+const groupedPosts = new Map<number, typeof chronologicalPosts>();
+
+for (const post of chronologicalPosts) {
+  const year = post.data.publishedAt.getFullYear();
+  const group = groupedPosts.get(year) ?? [];
+  group.push(post);
+  groupedPosts.set(year, group);
+}
+---
+
+<BaseLayout title="归档" description="按年份浏览 en 的个人随笔。">
+  <PageIntro
+    title="时间归档"
+    description="文章按时间排列。回看这些标题，也像在回看一段持续变化的理解过程。"
+    count={posts.length}
+  />
+
+  <section class="page-content">
+    <div class="container-shell page-grid">
+      <div class="page-main-card glass-card">
+        {
+          [...groupedPosts.entries()].map(([year, yearPosts]) => (
+            <section class="archive-group">
+              <div class="archive-year">{year}</div>
+              <div class="archive-list">
+                {yearPosts.map((post) => (
+                  <a class="archive-item" href={getPostPath(post)}>
+                    <time datetime={post.data.publishedAt.toISOString()}>
+                      {formatDate(post.data.publishedAt).slice(5)}
+                    </time>
+                    <strong>{post.data.title}</strong>
+                    <small>{getReadingTime(post.body)} 分钟</small>
+                  </a>
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+
+      <aside class="home-column home-sidebar">
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>归档概览</span>
+            <Icon name="archive" size={17} />
+          </div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <strong>{posts.length}</strong>
+              <span>全部文章</span>
+            </div>
+            <div class="stat-item">
+              <strong>{groupedPosts.size}</strong>
+              <span>年份</span>
+            </div>
+          </div>
+        </section>
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>浏览方式</span>
+            <Icon name="layers" size={17} />
+          </div>
+          <div class="sidebar-section-list">
+            <a class="sidebar-section-link" href="/posts/"><span>全部文章</span><small>→</small></a>
+            <a class="sidebar-section-link" href="/tags/"><span>按标签浏览</span><small>→</small></a>
+            <a class="sidebar-section-link" href="/categories/"><span>按分类浏览</span><small>→</small></a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

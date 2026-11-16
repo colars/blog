@@ -1,0 +1,17 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<BaseLayout title="页面不存在" description="这个页面可能已经移动，或者从未存在。" noindex>
+  <section class="not-found container-shell">
+    <div>
+      <div class="not-found-code">404</div>
+      <h1>这一页暂时不在</h1>
+      <p>也许链接写错了，或者这篇文章还在草稿盒里。</p>
+      <a class="button-primary" href="/">
+        回到首页 <Icon name="arrowRight" size={17} />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

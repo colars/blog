@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import PostCard from "../components/PostCard.astro";
+import ProfileCard from "../components/ProfileCard.astro";
+import { siteConfig } from "../config/site";
+import {
+  formatDate,
+  getAllCategories,
+  getAllTags,
+  getPostPath,
+  getPublishedPosts,
+  tagToSlug,
+  categoryToSlug,
+} from "../utils/content";
+
+const posts = await getPublishedPosts();
+const featuredPost = posts[0];
+const recentPosts = posts.slice(1, 5);
+const categories = [...getAllCategories(posts).entries()].slice(0, 6);
+const tags = [...getAllTags(posts).entries()].slice(0, 11);
+const latestPosts = posts.slice(0, 3);
+---
+
+<BaseLayout>
+  <div class="container-shell home-main">
+    <section class="hero-card">
+      <div class="hero-content">
+        <span class="hero-kicker"><Icon name="spark" size={15} /> 保持好奇，持续记录</span>
+        <h1 class="hero-title">en 的<br /><em>个人随笔</em></h1>
+        <p class="hero-subtitle">{siteConfig.subtitle}。这里没有固定的答案，只有学习、创作和生活中那些值得被留下的片段。</p>
+        <div class="hero-actions">
+          <a class="button-primary" href="/posts/">开始阅读 <Icon name="arrowRight" size={17} /></a>
+          <a class="button-ghost" href="/about/">认识我 <Icon name="user" size={17} /></a>
+        </div>
+      </div>
+      <div class="hero-monogram" aria-hidden="true">en</div>
+    </section>
+
+    <div class="home-layout">
+      <aside class="home-column home-left home-sidebar">
+        <ProfileCard />
+
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>探索分类</span>
+            <a href="/archive/">归档</a>
+          </div>
+          <div class="sidebar-section-list">
+            {
+              categories.map(([category, count]) => (
+                <a class="sidebar-section-link" href={`/categories/${categoryToSlug(category)}/`}>
+                  <span><Icon name="layers" size={15} /> {category}</span>
+                  <small>{count}</small>
+                </a>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>博客状态</span>
+            <Icon name="orbit" size={17} />
+          </div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <strong>{posts.length}</strong>
+              <span>文章</span>
+            </div>
+            <div class="stat-item">
+              <strong>{getAllTags(posts).size}</strong>
+              <span>标签</span>
+            </div>
+            <div class="stat-item">
+              <strong>∞</strong>
+              <span>好奇心</span>
+            </div>
+            <div class="stat-item">
+              <strong>1</strong>
+              <span>正在生长的博客</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="content-column">
+        <div class="category-bar" aria-label="文章分类">
+          <a class="category-pill" href="/posts/">全部文章</a>
+          {
+            categories.map(([category]) => (
+              <a class="category-pill" href={`/categories/${categoryToSlug(category)}/`}>{category}</a>
+            ))
+          }
+        </div>
+
+        {
+          featuredPost ? (
+            <>
+              <div class="content-header">
+                <div>
+                  <p class="eyebrow">RECENT WRITING</p>
+                  <h2 class="section-heading">最近在写</h2>
+                  <p class="section-caption">从第一篇开始，把想法写得更清晰一点。</p>
+                </div>
+                <a class="section-more" href="/posts/">全部文章 <Icon name="arrowRight" size={16} /></a>
+              </div>
+              <div class="post-list">
+                <PostCard post={featuredPost} featured />
+                {recentPosts.map((post) => <PostCard post={post} />)}
+              </div>
+            </>
+          ) : (
+            <div class="page-main-card glass-card">
+              <h2>第一篇文章正在路上</h2>
+              <p>在 Markdown 中写下第一篇内容后，这里会自动出现。</p>
+            </div>
+          )
+        }
+      </section>
+
+      <aside class="home-column home-right home-sidebar">
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>最新随笔</span>
+            <Icon name="message" size={17} />
+          </div>
+          <div class="note-list">
+            {
+              latestPosts.map((post) => (
+                <a class="note-item" href={getPostPath(post)}>
+                  <time datetime={post.data.publishedAt.toISOString()}>{formatDate(post.data.publishedAt)}</time>
+                  <p>{post.data.description}</p>
+                </a>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>热门标签</span>
+            <a href="/tags/">更多</a>
+          </div>
+          <div class="tag-cloud">
+            {tags.map(([tag, count]) => <a class="tag-chip" href={`/tags/${tagToSlug(tag)}/`}>#{tag} {count}</a>)}
+          </div>
+        </section>
+
+        <section class="sidebar-card glass-card">
+          <div class="sidebar-title">
+            <span>一句话</span>
+            <Icon name="spark" size={17} />
+          </div>
+          <blockquote style="margin: 0; color: var(--text-soft); font-family: var(--font-serif); font-size: 0.95rem; line-height: 1.8;">
+            “先记录，再理解。很多答案是在持续写作之后，才慢慢浮现出来的。”
+          </blockquote>
+          <p class="profile-role" style="margin-top: 0.8rem;">写给未来的自己</p>
+        </section>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

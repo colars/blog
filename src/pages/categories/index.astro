@@ -1,0 +1,38 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import {
+  categoryToSlug,
+  getAllCategories,
+  getPublishedPosts,
+} from "../../utils/content";
+
+const posts = await getPublishedPosts();
+const categories = getAllCategories(posts);
+---
+
+<BaseLayout title="分类" description="按主题分类浏览 en 的个人随笔。">
+  <PageIntro
+    title="文章分类"
+    description="主题比时间更适合建立知识之间的连接。选择一个分类，继续向下阅读。"
+    count={categories.size}
+    countLabel="个分类"
+  />
+
+  <section class="page-content">
+    <div class="container-shell">
+      <div class="page-main-card glass-card">
+        <div class="tag-index-grid">
+          {
+            [...categories.entries()].map(([category, count]) => (
+              <a class="tag-index-card" href={`/categories/${categoryToSlug(category)}/`}>
+                <strong>{category}</strong>
+                <span>{count} 篇文章</span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

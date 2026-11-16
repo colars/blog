@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../../components/BaseLayout.astro";
+import PostListing from "../../../components/PostListing.astro";
+import { getPublishedPosts, type Post } from "../../../utils/content";
+
+interface Props {
+  posts: Post[];
+  currentPage: number;
+}
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const pageSize = 6;
+  const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
+
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, index) => {
+    const page = index + 2;
+    return {
+      params: { page: String(page) },
+      props: { posts, currentPage: page },
+    };
+  });
+}
+
+const { posts, currentPage } = Astro.props;
+---
+
+<BaseLayout
+  title={`所有文章 · 第 ${currentPage} 页`}
+  description={`浏览 en 的个人随笔全部文章，第 ${currentPage} 页。`}
+>
+  <PostListing posts={posts} currentPage={currentPage} />
+</BaseLayout>
