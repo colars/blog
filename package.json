@@ -8,9 +8,13 @@
   },
   "packageManager": "pnpm@11.25.0",
   "scripts": {
+    "content:sync": "node scripts/sync-content.mjs",
+    "predev": "node scripts/sync-content.mjs",
     "dev": "node scripts/astro.mjs dev",
     "start": "node scripts/astro.mjs dev",
+    "precheck": "node scripts/sync-content.mjs",
     "check": "node scripts/astro.mjs check",
+    "prebuild": "node scripts/sync-content.mjs",
     "build": "node scripts/astro.mjs build && pagefind --site dist",
     "preview": "node scripts/astro.mjs preview",
     "astro": "node scripts/astro.mjs"

@@ -62,6 +62,24 @@ draft: false
 
 支持标准 Markdown、标题目录、代码高亮和上一篇／下一篇导航。设置 `draft: true` 后，文章不会进入正式页面、RSS 或搜索索引。
 
+## 私有文章与 Cloudflare Pages
+
+现有三篇文章继续保留在公开仓库。后续文章可以放入私有仓库 `colars/blog-content/posts/`，构建时自动与公开文章合并，公开代码的 Fork 不会包含后续私有文章源码。
+
+Cloudflare Pages 使用：
+
+```text
+Build command: pnpm build
+Output directory: dist
+Environment:
+  BLOG_CONTENT_REPO=colars/blog-content
+  BLOG_CONTENT_REF=main
+  CONTENT_REPO_TOKEN=<180 天只读 Token>
+  NODE_VERSION=22
+```
+
+`pnpm dev`、`pnpm check` 和 `pnpm build` 均会在执行前自动运行内容同步。完整配置、Token 权限和 Deploy Hook 工作流见 [Cloudflare Pages 部署说明](docs/cloudflare-pages.md)。
+
 ## 站点配置
 
 - 站点名称与作者资料：`src/config/site.ts`
