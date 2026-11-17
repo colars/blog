@@ -3,11 +3,14 @@ import BaseLayout from "../components/BaseLayout.astro";
 import PageIntro from "../components/PageIntro.astro";
 ---
 
-<BaseLayout title="搜索" description="搜索 en 的个人随笔。">
+<BaseLayout
+  title="搜索"
+  description="在 en 的个人随笔中搜索文章标题、标签与正文内容。"
+>
   <link slot="head" rel="stylesheet" href="/pagefind/pagefind-ui.css" />
   <PageIntro
     title="搜索文章"
-    description="输入标题、标签或正文里的关键词。搜索索引在生产构建后生成。"
+    description="博客已部署到 Cloudflare Pages，可搜索文章标题、标签和正文中的关键词。"
   />
 
   <section class="page-content">

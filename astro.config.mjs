@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://en-blog-pages.pages.dev",
+  site: "https://blog.xieje.cn",
   integrations: [sitemap()],
   markdown: {
     shikiConfig: {

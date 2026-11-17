@@ -6,7 +6,7 @@
 
 ```text
 Cloudflare Pages project: en-blog-pages
-Production URL: https://en-blog-pages.pages.dev
+Production URL: https://blog.xieje.cn/
 Public code repository: colars/blog
 Private content repository: colars/blog-content
 Production branch: main

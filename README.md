@@ -4,7 +4,7 @@
 
 GitHub 仓库：[colars/blog](https://github.com/colars/blog)
 
-线上站点：[en-blog-pages.pages.dev](https://en-blog-pages.pages.dev)
+线上站点：[blog.xieje.cn](https://blog.xieje.cn/)
 
 ## 技术栈
 
@@ -98,7 +98,7 @@ Project: en-blog-pages
 Branch: main
 Build command: pnpm build
 Output directory: dist
-URL: https://en-blog-pages.pages.dev
+URL: https://blog.xieje.cn/
 ```
 
 公开代码仓库更新后由 Cloudflare Git 集成自动构建；私有文章仓库 `posts/**` 更新后由 Deploy Hook 触发重新构建。

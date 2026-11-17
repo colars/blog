@@ -40,7 +40,7 @@
 - `CONTENT_REPO_TOKEN` 使用 Fine-grained Token，仅授予私有文章仓库 `Contents: Read-only`，有效期目标为 180 天。
 - 禁止在日志、代码、文档示例或 Git 提交中输出真实 Token。
 - 公开文章与私有文章文件名冲突时必须终止构建。
-- Cloudflare Pages 项目为 `en-blog-pages`，生产地址为 `https://en-blog-pages.pages.dev`。
+- Cloudflare Pages 项目为 `en-blog-pages`，正式生产地址为 `https://blog.xieje.cn/`。
 - 向私有文章仓库推送会通过 Deploy Hook 自动部署；推送前同样必须取得用户当次确认，不单独绕过部署确认。
 
 ## 内容约定

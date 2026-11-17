@@ -1,6 +1,6 @@
 # ROADMAP
 
-更新时间：2026-11-16 18:34
+更新时间：2026-11-17 11:12
 
 ## 当前状态
 
@@ -11,7 +11,7 @@
 - 生产构建、Pagefind 搜索索引、RSS、Sitemap 与站内链接检查均通过。
 - 项目已推送到 `https://github.com/colars/blog` 的 `main` 分支，后续推送需逐次确认。
 - 已支持公开文章与私有文章仓库合并构建，现有公开文章及其 Git 历史保持不变。
-- 已部署到 Cloudflare Pages，生产地址为 `https://en-blog-pages.pages.dev`。
+- 已部署到 Cloudflare Pages，并通过自定义域名访问：`https://blog.xieje.cn/`。
 - 私有文章仓库、加密 Token、Deploy Hook 和 GitHub Actions 自动部署链路均已验证。
 
 ### 进行中
@@ -20,7 +20,6 @@
 
 ### 待确认
 
-- 正式站点域名。
 - 作者头像、GitHub、邮箱等真实个人资料。
 
 ### 后续可选
@@ -30,6 +29,7 @@
 
 ## 最近完成
 
+- 2026-11-17 11:12：将正式站点地址切换为 `https://blog.xieje.cn/`，同步更新 canonical、RSS、Sitemap、文档和个人资料链接。
 - 2026-11-16 18:34：完成 Cloudflare Pages 首次生产部署、Deploy Hook、私有仓库 Actions Secret 与自动部署验证。
 - 2026-11-16 16:32：完成公开文章与私有文章合并构建、文件名冲突保护和 Cloudflare Pages 私有内容部署文档。
 - 2026-11-16 11:19：初始化 Git 并关联 `colars/blog`，保留远端初始 `LICENSE`，完成个人博客代码首次推送。
@@ -41,6 +41,7 @@
 
 ## 最近验证
 
+- 2026-11-17 11:12：`https://blog.xieje.cn/` 返回 200，页面标题为「en 的个人随笔」。
 - 2026-11-16 18:34：`https://en-blog-pages.pages.dev` 返回 200，页面标题为「en 的个人随笔」。
 - 2026-11-16 18:33：GitHub Actions 手动触发部署成功，随后 Cloudflare 生产部署 `524d58c9` 的 `deploy` 阶段状态为 `success`。
 - 2026-11-16 18:30：私有仓库 Secret `CLOUDFLARE_DEPLOY_HOOK_URL` 写入成功，Cloudflare Deploy Hook `blog-content-main` 触发返回 200。

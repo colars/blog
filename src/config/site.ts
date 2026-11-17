@@ -10,7 +10,7 @@ export const siteConfig = {
   avatar: "/images/avatar-en.svg",
   heroImage: "/images/hero-atmosphere.svg",
   startDate: "2026-11-12",
-  url: "https://en-blog-pages.pages.dev",
+  url: "https://blog.xieje.cn",
   profile: {
     name: "en",
     role: "AI 学习者 · 内容创作者",
@@ -23,9 +23,9 @@ export const siteConfig = {
       external: true,
     },
     {
-      label: "邮箱",
-      href: "mailto:hello@example.com",
-      external: false,
+      label: "博客",
+      href: "https://blog.xieje.cn/",
+      external: true,
     },
   ],
 } as const;
