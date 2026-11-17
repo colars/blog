@@ -19,7 +19,7 @@ export const siteConfig = {
   social: [
     {
       label: "GitHub",
-      href: "https://github.com/",
+      href: "https://github.com/colars/blog",
       external: true,
     },
     {

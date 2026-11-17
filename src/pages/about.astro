@@ -39,9 +39,15 @@ import { siteConfig } from "../config/site";
         </div>
         <h2>联系我</h2>
         <p>
-          GitHub 与邮箱目前使用占位配置，可在 <code>src/config/site.ts</code> 中替换成真实信息。你也可以通过 RSS 订阅这里的新文章。
+          如果你想查看博客源码，可以访问 GitHub 仓库；也可以回到博客首页继续阅读，或通过 RSS 订阅新文章。
         </p>
         <div class="article-meta">
+          <a href={siteConfig.social[0].href}>
+            <span><Icon name="github" size={16} /> GitHub 仓库</span>
+          </a>
+          <a href={siteConfig.social[1].href}>
+            <span><Icon name="mail" size={16} /> blog.xieje.cn</span>
+          </a>
           <a href="/rss.xml"><span><Icon name="rss" size={16} /> RSS 订阅</span></a>
           <a href="/posts/"><span><Icon name="article" size={16} /> 阅读文章</span></a>
         </div>
@@ -53,7 +59,7 @@ import { siteConfig } from "../config/site";
         <p>{siteConfig.profile.role}</p>
         <div class="profile-socials">
           <a href={siteConfig.social[0].href} aria-label="GitHub"><Icon name="github" size={18} /></a>
-          <a href={siteConfig.social[1].href} aria-label="邮箱"><Icon name="mail" size={18} /></a>
+          <a href={siteConfig.social[1].href} aria-label="博客"><Icon name="mail" size={18} /></a>
           <a href="/rss.xml" aria-label="RSS"><Icon name="rss" size={18} /></a>
         </div>
         <p class="profile-bio">{siteConfig.profile.bio}</p>
