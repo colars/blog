@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="60" y1="30" x2="1140" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#e9fbf5"/>
+      <stop offset=".52" stop-color="#f3faf7"/>
+      <stop offset="1" stop-color="#e8e4fb"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="translate(980 130) rotate(135) scale(430)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff0a8" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#fff0a8" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g filter="url(#blur)" opacity=".52">
+    <circle cx="1020" cy="490" r="190" fill="#a9dfd1"/>
+    <circle cx="920" cy="150" r="160" fill="#cfc8f4"/>
+  </g>
+  <g fill="none" stroke="#4c9c8b" stroke-linecap="round" opacity=".3">
+    <path d="M807 624c-7-146 43-256 150-330 47-32 68-81 62-147" stroke-width="3"/>
+    <path d="M918 340c-91-14-153 13-188 79 85 18 147-8 188-79Z" stroke-width="2"/>
+    <path d="M946 432c60-70 122-91 187-64-35 75-97 96-187 64Z" stroke-width="2"/>
+    <path d="M892 515c-71-11-122 12-154 68 69 16 120-6 154-68Z" stroke-width="2"/>
+  </g>
+  <g transform="translate(70 58)">
+    <rect width="205" height="48" rx="24" fill="#fff" fill-opacity=".55" stroke="#4c9c8b" stroke-opacity=".22"/>
+    <circle cx="26" cy="24" r="7" fill="#2eb89d"/>
+    <circle cx="26" cy="24" r="13" fill="none" stroke="#2eb89d" stroke-opacity=".34"/>
+    <text x="50" y="31" fill="#2a7569" font-family="'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="17" font-weight="700" letter-spacing="2">EN'S NOTES</text>
+  </g>
+  <text x="70" y="175" fill="#253634" font-family="Georgia, 'Songti SC', 'Microsoft YaHei', serif" font-size="35" font-style="italic">en</text>
+  <text x="70" y="290" fill="#253634" font-family="'Songti SC', 'Microsoft YaHei', serif" font-size="94" font-weight="700" letter-spacing="-5">en 的个人随笔</text>
+  <rect x="72" y="329" width="78" height="6" rx="3" fill="#2eb89d"/>
+  <text x="70" y="395" fill="#586d68" font-family="'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="29">记录 AI、创作与生活里的微光</text>
+  <text x="70" y="452" fill="#7a8e89" font-family="'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="20">个人随笔 · AI 学习 · 内容创作</text>
+  <g transform="translate(70 515)">
+    <rect width="314" height="58" rx="18" fill="#fff" fill-opacity=".48"/>
+    <text x="28" y="37" fill="#2c7f72" font-family="'Microsoft YaHei', 'Noto Sans SC', sans-serif" font-size="21" font-weight="700">blog.xieje.cn</text>
+  </g>
+  <g transform="translate(925 335)">
+    <circle r="132" fill="#fff" fill-opacity=".38" stroke="#fff" stroke-opacity=".68"/>
+    <circle r="160" fill="none" stroke="#fff" stroke-opacity=".36"/>
+    <circle r="194" fill="none" stroke="#fff" stroke-opacity=".24"/>
+    <text x="0" y="38" text-anchor="middle" fill="#356f67" font-family="Georgia, 'Songti SC', serif" font-size="106" font-style="italic">en</text>
+  </g>
+  <circle cx="1010" cy="127" r="8" fill="#fff5aa"/>
+  <circle cx="1040" cy="107" r="4" fill="#fff5aa" opacity=".7"/>
+  <circle cx="871" cy="184" r="4" fill="#fff5aa" opacity=".65"/>
+</svg>

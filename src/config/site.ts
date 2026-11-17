@@ -9,6 +9,7 @@ export const siteConfig = {
   timezone: "Asia/Shanghai",
   avatar: "/images/avatar-en.svg",
   heroImage: "/images/hero-atmosphere.svg",
+  ogImage: "/images/og-default.png",
   startDate: "2026-11-12",
   url: "https://blog.xieje.cn",
   profile: {

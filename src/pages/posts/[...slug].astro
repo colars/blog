@@ -3,6 +3,7 @@ import { render } from "astro:content";
 import BaseLayout from "../../components/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
 import PostCard from "../../components/PostCard.astro";
+import { siteConfig } from "../../config/site";
 import {
   formatLongDate,
   getPostPath,
@@ -56,7 +57,7 @@ const structuredData = {
     "@type": "Person",
     name: "en",
   },
-  image: new URL(cover, Astro.site).toString(),
+  image: new URL(siteConfig.ogImage, Astro.site).toString(),
   mainEntityOfPage: Astro.url.toString(),
 };
 ---
@@ -64,7 +65,12 @@ const structuredData = {
 <BaseLayout
   title={post.data.title}
   description={post.data.description}
-  image={cover}
+  publishedTime={post.data.publishedAt.toISOString()}
+  modifiedTime={
+    post.data.updatedAt?.toISOString() ?? post.data.publishedAt.toISOString()
+  }
+  section={post.data.category}
+  tags={post.data.tags}
   type="article"
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(structuredData)} />
