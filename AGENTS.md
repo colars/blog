@@ -49,6 +49,8 @@
 - 默认作者为 `en`，博客名称为 `en 的个人随笔`。
 - 草稿使用 `draft: true`，不会进入页面、RSS 和搜索索引。
 - 封面图统一放在 `public/images/`，使用原创或已获授权的素材。
+- 新文章使用标准 Markdown 代码围栏；代码块主题由 `src/styles/global.css` 中的 `.prose .astro-code` 规则统一适配亮暗模式，不在文章内硬编码浅色专用样式。
+- 新增正文组件或自定义 HTML 时，优先使用现有 `--text`、`--text-soft`、`--surface`、`--border` 等主题变量，确保两套主题均可读。
 
 ## 验证入口
 

@@ -1584,20 +1584,35 @@ button {
 .prose pre code {
   padding: 0;
   border: 0;
+  color: inherit;
   background: transparent;
   font-size: inherit;
 }
 
-.prose .astro-code,
-.prose .astro-code span {
-  color: var(--shiki-light);
-  background-color: var(--shiki-light-bg);
+.prose .astro-code {
+  color: var(--shiki-light, #24292e) !important;
+  background-color: var(--shiki-light-bg, #fff) !important;
 }
 
-[data-theme="dark"] .prose .astro-code,
+.prose .astro-code span {
+  color: var(--shiki-light, inherit) !important;
+  background-color: transparent !important;
+  font-style: var(--shiki-light-font-style, inherit) !important;
+  font-weight: var(--shiki-light-font-weight, inherit) !important;
+  text-decoration: var(--shiki-light-text-decoration, inherit) !important;
+}
+
+[data-theme="dark"] .prose .astro-code {
+  color: var(--shiki-dark, #e1e4e8) !important;
+  background-color: var(--shiki-dark-bg, #24292e) !important;
+}
+
 [data-theme="dark"] .prose .astro-code span {
-  color: var(--shiki-dark);
-  background-color: var(--shiki-dark-bg);
+  color: var(--shiki-dark, inherit) !important;
+  background-color: transparent !important;
+  font-style: var(--shiki-dark-font-style, inherit) !important;
+  font-weight: var(--shiki-dark-font-weight, inherit) !important;
+  text-decoration: var(--shiki-dark-text-decoration, inherit) !important;
 }
 
 .prose img {
